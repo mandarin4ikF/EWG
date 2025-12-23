@@ -1,44 +1,55 @@
-# English With Songs (MVP)
+# EWG Pro: English With Songs
 
-Learn English by listening to your favorite songs! This application synchronizes lyrics, allows you to translate words on the click, and generates exercises based on your personal dictionary.
+**EWG Pro** is a high-performance, premium language learning platform. It transforms the way you learn English by turning your favorite music into an interactive linguistic training ground.
 
-## Features
-- **Search & Play**: Find any song (powered by LRCLIB) and play it with synchronized lyrics.
-- **Interactive Lyrics**: Click any word to translate it and see it in context.
-- **Personal Dictionary**: Save words you want to learn.
-- **Exercises**: Auto-generated generated flashcards/quizzes from your saved words.
+## 🌟 Premium Features (Vanta Design System)
+- **Cinematic Experience**: A world-class interface featuring the **Vanta** dark theme, glassmorphism, and fluid Framer Motion animations.
+- **Precision Audio Engine**: Custom-engineered player with word-level lyric synchronization.
+- **AI-Linguistic Core**: Deep grammar analysis and word explanations powered by integrated AI.
+- **Dynamic Practice**: Cloze tests and exercises generated in real-time from your personal vocabulary.
 
-## Tech Stack
-- **Frontend**: React, Vite, TailwindCSS, TypeScript.
-- **Backend**: FastAPI, PostgreSQL, Redis, SQLAlchemy.
-- **External Services**: LRCLIB (Lyrics), Google Translate (via deep-translator).
+## 🛠 Tech Stack
+- **Frontend**: React 18, Vite, TailwindCSS (Vanta Tokens), Framer Motion.
+- **Backend**: FastAPI (Python), SQLAlchemy (Async), PostgreSQL.
+- **AI/NLP**: Ollama (Local AI), Spacy, Google Translate API.
+- **Database**: PostgreSQL (Production) / SQLite (Development).
 
-## Setup Instructions
+## 🚀 Professional Setup
 
-### Prerequisites
+### 1. Prerequisites
 - Python 3.11+
 - Node.js 18+
-- PostgreSQL
-- Redis
+- Ollama (Running locally for AI features)
 
-### Backend
-1. Navigate to `backend/`
-2. Create virtual environment: `python -m venv venv`
-3. Activate: `.\venv\Scripts\activate`
-4. Install dependencies: `pip install -r requirements.txt`
-5. Configure `.env` (or update `app/core/config.py` with your DB credentials).
-6. Run migrations (or let FastAPI auto-create tables via `models.Base.metadata.create_all` - *Note: This MVP uses auto-create on startup in `database.py` logic if added, or rely on manual Alembic init. For simplcity, ensure DB `ewg_db` exists*).
-7. Start server: `python app/main.py` -> Running on `http://localhost:8000`
+### 2. Quick Start (Development)
+The easiest way to start both the backend and frontend simultaneously:
+```powershell
+./start_dev.bat
+```
 
-### Frontend
-1. Navigate to `frontend/`
-2. Install dependencies: `npm install`
-3. Start dev server: `npm run dev`
-4. Open `http://localhost:5173`
+### 3. Manual Installation
 
-## Usage
-1. Enter a song name (e.g., "Yesterday").
-2. Select a track.
-3. Provide an audio file (since we don't host MP3s due to copyright) or just read along.
-4. Click words to translate.
-5. Go to "Library" to review words and take quizzes.
+#### Backend
+```bash
+cd backend
+python -m venv venv
+./venv/Scripts/activate
+pip install -r requirements.txt
+python app/main.py
+```
+
+#### Frontend
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+## 📈 Roadmap
+- [x] Phase 1: Premium Vanta UI/UX Overhaul
+- [ ] Phase 2: Gamification (Mastery XP & Leaderboards)
+- [ ] Phase 3: Dockerized Production Infrastructure
+- [ ] Phase 4: Hybrid AI Engine (GPT-4o Integration)
+
+---
+*Note: This project is optimized for high-valuation professional standards.*

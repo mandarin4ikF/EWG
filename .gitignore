@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+backend/venv/
+.venv/
+env/
+venv/
+ENV/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+backend/__pycache__/
+backend/app/__pycache__/
+
+# Frontend build
+frontend/dist/
+frontend/build/
+.parcel-cache/
+.eslintcache/
+
+# Databases
+backend/ewg.db
+backend/ewg_v*.db
+*.sqlite3
+
+# Uploads & Temp
+backend/uploads/
+uploads/
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Project specific redundant files
+package.json
+package-lock.json
+node_modules/

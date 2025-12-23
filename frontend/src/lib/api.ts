@@ -42,6 +42,11 @@ export const translateWord = async (word: string) => {
     return res.data;
 };
 
+export const aiExplainWord = async (word: string, context: string) => {
+    const res = await api.post(`/tracks/explain`, { word, context });
+    return res.data;
+};
+
 export const uploadAudio = async (trackId: number, file: File) => {
     const formData = new FormData();
     formData.append('file', file);

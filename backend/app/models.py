@@ -14,6 +14,7 @@ class User(Base):
     
     words = relationship("UserWord", back_populates="user")
     exercises = relationship("Exercise", back_populates="user")
+    mastery_history = relationship("MasteryHistory", back_populates="user")
 
 class Track(Base):
     __tablename__ = "tracks"
@@ -38,9 +39,11 @@ class UserWord(Base):
     translation = Column(String)
     context_phrase = Column(String, nullable=True)
     
-    # Simple SRS fields
+    # SRS (Spaced Repetition System) fields
+    interval = Column(Integer, default=0) # in days
+    ease_factor = Column(Integer, default=250) # multiplied by 100 for storage (2.5 -> 250)
     review_count = Column(Integer, default=0)
-    next_review_at = Column(DateTime(timezone=True), default=func.now())
+    next_review_at = Column(DateTime(timezone=True), server_default=func.now())
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     user = relationship("User", back_populates="words")
@@ -56,3 +59,13 @@ class Exercise(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     user = relationship("User", back_populates="exercises")
+
+class MasteryHistory(Base):
+    __tablename__ = "mastery_history"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    date = Column(DateTime(timezone=True), server_default=func.now())
+    mastered_count = Column(Integer)
+
+    user = relationship("User", back_populates="mastery_history")

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { searchTracks, importTrack } from '@/lib/api';
-import { Loader2, Search as SearchIcon } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { searchTracks, importTrack } from '../lib/api';
+import { Loader2, Search as SearchIcon, X } from 'lucide-react';
 
 interface SearchProps {
     onTrackSelect: (track: any) => void;
@@ -10,6 +11,18 @@ export const Search: React.FC<SearchProps> = ({ onTrackSelect }) => {
     const [query, setQuery] = useState('');
     const [results, setResults] = useState<any[]>([]);
     const [loading, setLoading] = useState(false);
+    const [isFocused, setIsFocused] = useState(false);
+    const searchRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+                setIsFocused(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
 
     const handleSearch = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -19,6 +32,7 @@ export const Search: React.FC<SearchProps> = ({ onTrackSelect }) => {
         try {
             const res = await searchTracks(query);
             setResults(res);
+            setIsFocused(true);
         } catch (err) {
             console.error(err);
         } finally {
@@ -33,6 +47,7 @@ export const Search: React.FC<SearchProps> = ({ onTrackSelect }) => {
             onTrackSelect(track);
             setResults([]);
             setQuery('');
+            setIsFocused(false);
         } catch (err) {
             console.error(err);
         } finally {
@@ -41,34 +56,58 @@ export const Search: React.FC<SearchProps> = ({ onTrackSelect }) => {
     };
 
     return (
-        <div className="absolute top-4 right-4 z-50 w-96 max-h-[80vh] flex flex-col">
-            <form onSubmit={handleSearch} className="flex gap-2 mb-2">
+        <div ref={searchRef} className="relative w-full group">
+            <form onSubmit={handleSearch} className="relative group/form">
+                <div className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)] group-focus-within/form:text-[var(--vanta-accent-blue)] transition-colors">
+                    <SearchIcon size={18} />
+                </div>
                 <input
                     type="text"
                     value={query}
+                    onFocus={() => setIsFocused(true)}
                     onChange={e => setQuery(e.target.value)}
-                    placeholder="Search song..."
-                    className="flex-1 px-4 py-2 rounded-lg bg-slate-800 border border-slate-700 focus:outline-none focus:border-yellow-500"
+                    placeholder="Search artist or song title..."
+                    className="w-full pl-11 pr-12 py-2.5 rounded-xl bg-[var(--vanta-surface-bright)] border border-[var(--vanta-border)] focus:outline-none focus:border-[var(--vanta-accent-blue)] focus:ring-4 focus:ring-[var(--vanta-accent-glow)] transition-all text-sm placeholder:text-[var(--text-muted)]"
                 />
-                <button type="submit" disabled={loading} className="p-2 bg-yellow-500 rounded-lg text-slate-900 font-bold hover:bg-yellow-400">
-                    {loading ? <Loader2 className="animate-spin" /> : <SearchIcon />}
-                </button>
+
+                {query && (
+                    <button
+                        type="button"
+                        onClick={() => { setQuery(''); setResults([]); }}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 text-[var(--text-muted)] hover:text-white transition-colors"
+                    >
+                        <X size={14} />
+                    </button>
+                )}
+
+                {loading && (
+                    <div className="absolute right-10 top-1/2 -translate-y-1/2">
+                        <Loader2 size={16} className="animate-spin text-[var(--vanta-accent-blue)]" />
+                    </div>
+                )}
             </form>
 
-            {results.length > 0 && (
-                <div className="bg-slate-800 rounded-lg border border-slate-700 overflow-y-auto shadow-xl">
-                    {results.map(r => (
-                        <div
-                            key={r.id}
-                            className="p-3 hover:bg-slate-700 cursor-pointer border-b border-slate-700 last:border-0"
-                            onClick={() => handleSelect(r.id)}
-                        >
-                            <div className="font-bold text-sm truncate">{r.trackName}</div>
-                            <div className="text-xs text-slate-400 truncate">{r.artistName}</div>
-                        </div>
-                    ))}
-                </div>
-            )}
+            <AnimatePresence>
+                {isFocused && results.length > 0 && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 10, scale: 0.98 }}
+                        className="absolute top-full left-0 right-0 mt-2 p-2 bg-[var(--vanta-surface-bright)] border border-[var(--vanta-border)] rounded-2xl shadow-2xl z-[100] max-h-[400px] overflow-y-auto vanta-glass"
+                    >
+                        {results.map(r => (
+                            <button
+                                key={r.id}
+                                className="w-full p-3 flex flex-col items-start gap-0.5 hover:bg-white/5 rounded-xl transition-colors group/item"
+                                onClick={() => handleSelect(r.id)}
+                            >
+                                <div className="font-semibold text-sm text-[var(--text-primary)] group-hover/item:text-[var(--vanta-accent-blue)] transition-colors line-clamp-1">{r.trackName}</div>
+                                <div className="text-xs text-[var(--text-muted)] group-hover/item:text-[var(--text-secondary)] transition-colors">{r.artistName}</div>
+                            </button>
+                        ))}
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 };

@@ -23,7 +23,7 @@ class Settings(BaseSettings):
 
     @property
     def SQLALCHEMY_DATABASE_URI(self) -> str:
-        return "sqlite+aiosqlite:///./ewg_v3.db"
+        return "sqlite+aiosqlite:///./ewg_v4.db"
 
     class Config:
         case_sensitive = True

@@ -46,6 +46,11 @@ async def add_word(
     db.add(new_word)
     await db.commit()
     await db.refresh(new_word)
+    
+    # Update mastery history
+    from app.services.stats import stats_service
+    await stats_service.update_mastery_snapshot(current_user.id, db)
+    
     return new_word
 
 @router.get("/words", response_model=List[WordResponse])
@@ -56,3 +61,27 @@ async def get_words(
     result = await db.execute(select(UserWord).where(UserWord.user_id == current_user.id))
     words = result.scalars().all()
     return words
+@router.delete("/words/{word_id}")
+async def delete_word(
+    word_id: int,
+    current_user: User = Depends(deps.get_current_user),
+    db: AsyncSession = Depends(deps.get_db)
+):
+    result = await db.execute(
+        select(UserWord).where(
+            UserWord.id == word_id,
+            UserWord.user_id == current_user.id
+        )
+    )
+    word = result.scalars().first()
+    if not word:
+        raise HTTPException(status_code=404, detail="Word not found")
+    
+    await db.delete(word)
+    await db.commit()
+    
+    # Update mastery history
+    from app.services.stats import stats_service
+    await stats_service.update_mastery_snapshot(current_user.id, db)
+    
+    return {"status": "success"}

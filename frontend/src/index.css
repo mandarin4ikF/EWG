@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-slate-900 text-white min-h-screen;
+  }
+}
+
+.lyric-line {
+  @apply transition-all duration-300 opacity-50 py-2 text-lg cursor-pointer hover:opacity-80;
+}
+
+.lyric-line.active {
+  @apply opacity-100 text-2xl font-bold text-yellow-400 scale-105;
+}
+
+.word-span {
+  @apply hover:underline decoration-yellow-500 decoration-2 transition-colors;
+}

@@ -1,55 +1,101 @@
-# EWG Pro: English With Songs
+# 🩸🎤💵 English With Gang (EWG) MVP 🤘🔥🙌
 
-**EWG Pro** is a high-performance, premium language learning platform. It transforms the way you learn English by turning your favorite music into an interactive linguistic training ground.
+Yo, wazzup **FAM**?! 🗣️💀 Это **EWG (English With Gang)** — тема для тех, кто реально хочет шарить в инглише и понимать, о чём читают в треках! 🎤🇺🇸
 
-## 🌟 Premium Features (Vanta Design System)
-- **Cinematic Experience**: A world-class interface featuring the **Vanta** dark theme, glassmorphism, and fluid Framer Motion animations.
-- **Precision Audio Engine**: Custom-engineered player with word-level lyric synchronization.
-- **AI-Linguistic Core**: Deep grammar analysis and word explanations powered by integrated AI.
-- **Dynamic Practice**: Cloze tests and exercises generated in real-time from your personal vocabulary.
+Если ты устал от скучных учебников и хочешь понимать своих **Homies** с полуслова — ты по адресу! Врубай музло на полную 🔊, читай тексты и будь в теме! 😎💸
 
-## 🛠 Tech Stack
-- **Frontend**: React 18, Vite, TailwindCSS (Vanta Tokens), Framer Motion.
-- **Backend**: FastAPI (Python), SQLAlchemy (Async), PostgreSQL.
-- **AI/NLP**: Ollama (Local AI), Spacy, Google Translate API.
-- **Database**: PostgreSQL (Production) / SQLite (Development).
+## ✨💎 Real Trap Features (Фичи) ��🔫
 
-## 🚀 Professional Setup
+### 🎧🎹 Умный плеер и Лирика 📝👀
+*   ⏱️ **Синхрон, бро**: Текст летит ✈️ **автоматически** под бит! Не теряйся в потоке! 🌊🥁
+*   👆 **Тыкай сюда**: Не знаешь слово? Жми на него 🖱️ и узнай, че это значит! 💡�
+*   🤖 **AI-Broski**: Наш ИИ — это твой личный **Бро**, который объяснит тебе сленг, идиомы и скрытый смысл! ��🤯 *Real Talk!* 🧢🗣️
 
-### 1. Prerequisites
-- Python 3.11+
-- Node.js 18+
-- Ollama (Running locally for AI features)
+### 🔍🌍 Поиск и Стафф 📂💿
+*   🌌 **Глобальный поиск**: Ищи любые бенгеры 🔎 через **LRCLIB**! Весь мир у твоих ног! ��🎵
+*   📥 **Лутай хиты**: Добавляй треки 🌟 к себе в коллекцию одним кликом! ✅🖱️
+*   🎤 **Свой стафф**: Заливай свои MP3 🎶 и качай под них прямо тут! 🎧��💨
 
-### 2. Quick Start (Development)
-The easiest way to start both the backend and frontend simultaneously:
-```powershell
+### 📚🎓 Прокачка и Респект 📈🩸
+*   💖 **Общак слов**: Скидывай сложные слова в "Избранное" ⭐, чтобы потом перетереть за них! 📝👊
+*   🏋️‍♀️ **Тренировка**: AI сам намутит тебе тесты 📝, чтобы ты был в форме! *Grind hard!* 💪🎯
+*   📊 **Стата**: Смотри, насколько ты крут 🚀 — сколько слов поднял 🧠, сколько треков размотал 🎧! Respect! ✅🏆
+
+---
+
+## 🛠⚙️ Под Капотом (Tech Stack) 🏎️💨
+
+### 🐍 Backend (Движок)
+*   🐍 **Python 3.10+** — Мощь, брат! 💪
+*   ⚡ **FastAPI**: Летает быстрее пули! 🔫🚀
+*   🗄️ **SQLAlchemy**: База — это святое (SQLite)! 💾🙏
+*   🛡️ **Pydantic**: Чтобы никакой ерунды не прошло! ✅🧱
+*   🤖 **OpenAI / Custom AI**: Мозги операции! 🧠✨
+
+### ⚛️ Frontend (Лицо)
+*   ⚛️ **React 18** (Vite): Стиль и скорость! ⚡🕶️
+*   🟦 **TypeScript**: Четко по понятиям — никаких ошибок! 🛡️💻
+*   🎨 **Tailwind CSS**: Выглядит *Dope*! 💅✨
+*   📡 **Axios**: Связь с сервером! 📞🌐
+*   🗺️ **React Router**: Чтобы не заблудиться на районе! 🧭🚶‍♂️
+
+---
+
+## 🚀🔥 Запуск Движухи (Installation) 🏁🏎️
+
+### 📋❗ Че надо иметь (Prerequisites)
+Убедитесь, что у вас есть этот стафф:
+1.  🐍 **Python 3.10** или выше.
+2.  🟩 **Node.js 18** или выше (для фронта).
+3.  🐙 **Git**.
+
+### ⚡🏎️ Быстрый Врыв (Fast Start) 🌪️🚀
+Просто запусти этот скрипт, и всё будет *Lit*! 🔥:
+```bash
 ./start_dev.bat
 ```
+Скрипт сам всё настроит, скачает, и запустит! Тебе останется только *Chill*! 🧘‍♂️🌱
 
-### 3. Manual Installation
+### 🔧🛠️ Ручками (Для реальных профи 😎)
 
-#### Backend
+Если скрипт что-то не то делает 😱, без паники! Делай так:
+
+#### 1. 🐍 Backend
 ```bash
 cd backend
 python -m venv venv
-./venv/Scripts/activate
-pip install -r requirements.txt
-python app/main.py
+# 🖥️ Windows:
+venv\Scripts\activate
+# 🐧 Linux/Mac:
+# source venv/bin/activate
+
+pip install -r requirements.txt 📥
+# 🚀 Врубай шарманку
+python -m app.main
 ```
 
-#### Frontend
+#### 2. ⚛️ Frontend
+В новом окне терминала 🖥️:
 ```bash
 cd frontend
-npm install
-npm run dev
+npm install 📦
+npm run dev 🚀
 ```
 
-## 📈 Roadmap
-- [x] Phase 1: Premium Vanta UI/UX Overhaul
-- [ ] Phase 2: Gamification (Mastery XP & Leaderboards)
-- [ ] Phase 3: Dockerized Production Infrastructure
-- [ ] Phase 4: Hybrid AI Engine (GPT-4o Integration)
+После этого заходи сюда и кайфуй: 👉 **http://localhost:5173** 👈
 
 ---
-*Note: This project is optimized for high-valuation professional standards.*
+
+## ❓🆘 Если проблемы (Troubleshooting) 🛠️🚑
+
+### 🚫❌ Ошибка: `'node' is not recognized` 😱
+Если видишь эту ошибку 🤢, значит **Node.js** потерялся! 🙈
+1.  Качай Node.js с официального сайта 🌐.
+2.  Ребутни свой комп 🔄!
+
+### 🔌⛔ Порты заняты
+Если порты `8000` или `5173` заняты кем-то другим 🛑, освободи их 🔓 или поменяй цифры в `main.py` и `vite.config.ts`.
+
+---
+
+**Все, давай! Учи инглиш и будь красавчиком! 🇬🇧🎉🚀 Peace out! ✌️😎🔥**
